@@ -182,7 +182,7 @@ try {
             :proposer_name, :proposer_rotary_id, :proposer_phone, :proposer_email,
             :seconder_name, :seconder_rotary_id, :seconder_phone, :seconder_email,
             :manifesto_summary, :passport_photo, :dues_evidence, :manifesto_file, :additional_file,
-            :signature_data, :peace_pact_accepted, :four_way_test_accepted, 'PENDING', datetime('now', 'localtime')
+            :signature_data, :peace_pact_accepted, :four_way_test_accepted, 'PENDING', :created_at
         )
     ");
 
@@ -213,7 +213,8 @@ try {
         ':additional_file' => $additionalFilePath,
         ':signature_data' => $signatureData,
         ':peace_pact_accepted' => $peacePact,
-        ':four_way_test_accepted' => $fourWayTest
+        ':four_way_test_accepted' => $fourWayTest,
+        ':created_at' => date('Y-m-d H:i:s')
     ]);
 
     $insertedId = $pdo->lastInsertId();

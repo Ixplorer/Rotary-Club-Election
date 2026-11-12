@@ -1,9 +1,11 @@
 # Rotary Club of Asokoro — 2027/2028 Officers Election Portal
 
 [![Rotary International](https://img.shields.io/badge/Rotary%20International-District%209125-00246C?style=for-the-badge&logo=rotary)](https://rotary.org)
-[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![PHP](https://img.shields.io/badge/PHP-8.0+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![MySQL](https://img.shields.io/badge/MySQL-5.7%20%2F%208.x-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
+[![MariaDB](https://img.shields.io/badge/MariaDB-10.x+-003545?style=for-the-badge&logo=mariadb&logoColor=white)](https://mariadb.org)
 [![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org)
-[![Responsive](https://img.shields.io/badge/Mobile-Optimized-10B981?style=for-the-badge)](https://github.com/Ixplorer/Rotary-Club-Election)
+[![Mobile Optimized](https://img.shields.io/badge/Mobile-Optimized-10B981?style=for-the-badge)](https://github.com/Ixplorer/Rotary-Club-Election)
 
 > **Official Notice, Guidelines, and Online Expression of Interest Portal for the 2027/2028 Rotary Year Officers Election.**  
 > **Rotary Club of Asokoro — District 9125, Nigeria • "The Pace Setter"**  
@@ -53,27 +55,83 @@ Guided unconditionally by the **Rotary Four-Way Test**:
 
 ---
 
-## ✨ Key Features & Architecture
+## ⚡ Self-Healing Database Engine (Zero-Friction Live Deployment)
+
+The portal features an **Intelligent Multi-Driver Auto-Creating Database Engine** designed specifically so that when you upload the files to any live web host (cPanel, Plesk, VPS, Shared Hosting, or Cloud), **everything works immediately without manual database setup**:
+
+### 1. Automatic Schema Creation On First Run
+- When any user visits the site or makes a submission, `config.php` checks if the database and required tables (`nominations`, `audit_logs`) exist.
+- If not found, it **automatically runs the DDL schema creation** with full `InnoDB` engine, `utf8mb4_unicode_ci` collation, indexes, foreign integrity checks, and auto-seeding.
+- Even if the MySQL database has not been created yet in phpMyAdmin, `config.php` will attempt `CREATE DATABASE IF NOT EXISTS \`rotary_election\`` automatically.
+
+### 2. Dual-Driver Architecture (`DB_DRIVER='auto'|'mysql'|'sqlite'`)
+- **Live Servers (MySQL / MariaDB)**: Default choice for production. High concurrency, ACID compliance, and standard phpMyAdmin access.
+- **Plug-and-Play Fallback (SQLite3)**: If MySQL is unavailable or offline, the system seamlessly falls back to a standalone file database in `data/election.db` with zero configuration.
+
+### 3. Standalone SQL Dump Files
+For administrators who prefer manual 1-click import into phpMyAdmin:
+- [`database.sql`](database.sql): Complete database creation script with table schemas and indexes.
+- [`schema.sql`](schema.sql): Table DDL scripts for existing databases.
+
+### 4. Interactive Diagnostic & Verification Utility (`setup.php`)
+- Visit `https://your-domain.com/setup.php` (or run `php setup.php` in CLI) for a live visual health check verifying PHP version, PDO drivers, directory write permissions, table record counts, and database connectivity.
+
+---
+
+## 🌐 Live Server Deployment Guide (cPanel / Plesk / Apache / Nginx)
+
+### Step 1: Upload Files
+Upload all repository files to your live server document root (e.g., `public_html/` or a subdirectory like `public_html/rotary/`).
+
+### Step 2: Configure MySQL Credentials (Optional)
+If using MySQL / MariaDB on your live host, copy `.env.example` to `.env` in the project root:
+```ini
+DB_DRIVER=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=your_cpanel_dbname
+DB_USER=your_cpanel_dbuser
+DB_PASS=your_cpanel_dbpass
+ADMIN_PASSKEY=asokoro2027
+```
+*(Alternatively, you can edit the fallback constants directly inside `config.php`.)*
+
+### Step 3: Set Directory Permissions
+Ensure the following directories are writable by the web server (chmod `755` or `775`):
+- `uploads/` (for applicant passport photographs, dues receipts, and manifestos)
+- `data/` (for SQLite database fallback)
+
+### Step 4: Verify Deployment
+Open your browser and navigate to:
+```
+https://your-domain.com/setup.php
+```
+`setup.php` will auto-create the tables, verify directory permissions, and confirm:
+`[OK] Database Schema Ready & Synchronized!`
+
+---
+
+## ✨ Application Architecture & Features
 
 ### 1. Public Portal (`index.php`)
-- **Animated Hero Section**: Ambient glowing light orbs, rotating background Rotary wheel, 3D card perspective, and running marquee ticker of available offices.
-- **Real-Time Flip Countdown Timer**: High-precision countdown clock to the 20th November 5:00 PM nomination cut-off.
-- **12-Stage Timetable & Guidelines**: Horizontal swipeable pill navigation on mobile devices with comprehensive guidelines.
+- **Dynamic Animated Hero Section**: Ambient glowing light orbs, rotating 3D Rotary wheel, smooth hover perspectives, and running ticker of available offices.
+- **Real-Time Countdown Timer**: High-precision flip countdown clock to the 20th November 5:00 PM nomination cut-off.
+- **12-Stage Timetable & Guidelines**: Interactive guidelines with swipeable pill navigation on mobile devices.
 - **5-Step Expression of Interest Form**:
   - *Step 1:* Personal profile & position selector (with dynamic President-nominee RLI & Board experience fields).
   - *Step 2:* Proposer & Seconder validation (with distinct endorser and self-nomination checks).
-  - *Step 3:* Uploads (Passport headshot, Club dues evidence, Manifesto summary / PDF).
-  - *Step 4:* Peace Pact & Four-Way Test affirmation + HTML5 Canvas Digital Signature Pad (touch-action enabled for smartphones).
-  - *Step 5:* Full dossier review summary and instant submission.
+  - *Step 3:* Document uploads (Passport photo, Club dues evidence, Manifesto summary / PDF).
+  - *Step 4:* Peace Pact & Four-Way Test affirmation + HTML5 Canvas Digital Signature Pad.
+  - *Step 5:* Dossier review summary and instant submission.
 - **Online Status Verification Tool**: Instant candidate lookup by Reference ID (`RCA-27-XXXXXX`), Rotary Member ID, or Email.
 
 ### 2. Standalone Acknowledgement Receipt (`receipt.php`)
 - Generates an official, printable acknowledgment receipt with club seal.
 - Displays candidate headshot, full profile, checklist items, and candidate digital signature.
-- Dynamic offline QR Code encoding the direct verification URL for mobile scanning.
+- Dynamic offline QR Code encoding the direct verification URL for smartphone scanning.
 
 ### 3. Electoral Committee Admin Portal (`admin.php`)
-- Passkey-protected dashboard (**Passkey:** `asokoro2027`).
+- Passkey-protected dashboard (**Default Passkey:** `asokoro2027`).
 - Real-time nomination statistics (Total, Pending, Cleared, Disqualified, President Nominee).
 - Search, filter by office, and filter by screening status.
 - Candidate Dossier Modal: View complete applicant details, passport photo, dues receipt, and manifesto.
@@ -89,34 +147,11 @@ Guided unconditionally by the **Rotary Four-Way Test**:
 
 ## 🛠️ Technology Stack
 
-- **Backend**: PHP 8.x (Vanilla, zero external framework dependencies)
-- **Database**: SQLite3 (`PDO_SQLITE`) with automated schema migration on initial run
+- **Backend**: PHP 8.0+ (Vanilla, zero external framework dependencies)
+- **Database**: MySQL 5.7+ / MySQL 8.x / MariaDB 10.x+ / SQLite 3
 - **Frontend**: HTML5, Vanilla CSS3 (Custom Design System, CSS Variables, Flexbox, Grid), Vanilla JavaScript (ES6+)
 - **Libraries**: `qrcode.min.js` (Pure client-side QR generation)
 - **Typography**: Outfit & Plus Jakarta Sans via Google Fonts
-
----
-
-## 🚀 Local Installation & Setup
-
-1. **Prerequisites**:
-   - XAMPP / WAMP / Apache server with PHP 8.0+ and `pdo_sqlite` enabled.
-
-2. **Clone the repository**:
-   ```bash
-   git clone https://github.com/Ixplorer/Rotary-Club-Election.git
-   ```
-
-3. **Deploy to Web Root**:
-   - Move or clone the directory into your server's web root (e.g., `c:/xampp/htdocs/rotary`).
-
-4. **Directory Permissions**:
-   - Ensure the `data/` and `uploads/` directories are writable by the web server.
-
-5. **Access the Portal**:
-   - **Public Portal:** `http://localhost/rotary/index.php`
-   - **Committee Admin:** `http://localhost/rotary/admin.php` *(Default Passkey: `asokoro2027`)*
-   - **Sample Receipt:** `http://localhost/rotary/receipt.php?ref=RCA-27-261112-B776E`
 
 ---
 
@@ -130,5 +165,5 @@ Guided unconditionally by the **Rotary Four-Way Test**:
 
 ## 📜 License
 
-Created for the **Rotary Club of Asokoro** (District 9125, Nigeria). All rights reserved.
+Created for the **Rotary Club of Asokoro** (District 9125, Nigeria). All rights reserved.  
 Guided by the principle of *"Service Above Self"*.

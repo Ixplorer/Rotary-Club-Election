@@ -91,10 +91,15 @@ if ($action === 'update_status') {
 
     $stmt = $pdo->prepare("
         UPDATE nominations 
-        SET screening_status = :status, screening_notes = :notes, screening_updated_at = datetime('now', 'localtime')
+        SET screening_status = :status, screening_notes = :notes, screening_updated_at = :updated_at
         WHERE id = :id
     ");
-    $stmt->execute([':status' => $newStatus, ':notes' => $notes, ':id' => $id]);
+    $stmt->execute([
+        ':status' => $newStatus,
+        ':notes' => $notes,
+        ':id' => $id,
+        ':updated_at' => date('Y-m-d H:i:s')
+    ]);
 
     echo json_encode([
         'success' => true,
