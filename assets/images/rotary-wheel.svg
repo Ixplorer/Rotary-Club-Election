@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD15C"/>
+      <stop offset="50%" stop-color="#F7A81B"/>
+      <stop offset="100%" stop-color="#D98200"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00246C"/>
+      <stop offset="100%" stop-color="#00143E"/>
+    </linearGradient>
+    <filter id="subtleDrop" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- 24 Cogs of the Rotary Wheel -->
+  <g id="cogs" fill="url(#goldGrad)" filter="url(#subtleDrop)">
+    <!-- 24 cogs arranged radially -->
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(0 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(15 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(30 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(45 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(60 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(75 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(90 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(105 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(120 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(135 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(150 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(165 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(180 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(195 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(210 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(225 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(240 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(255 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(270 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(285 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(300 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(315 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(330 100 100)" />
+    <rect x="94" y="2" width="12" height="18" rx="2" transform="rotate(345 100 100)" />
+  </g>
+
+  <!-- Outer Ring -->
+  <circle cx="100" cy="100" r="88" fill="url(#goldGrad)" />
+  <circle cx="100" cy="100" r="76" fill="url(#blueGrad)" />
+
+  <!-- Rotary International Text Arcs -->
+  <path id="upperArc" d="M 30,100 A 70,70 0 0,1 170,100" fill="none" />
+  <path id="lowerArc" d="M 170,100 A 70,70 0 0,1 30,100" fill="none" />
+
+  <text font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="13" fill="url(#goldGrad)" letter-spacing="3.5">
+    <textPath href="#upperArc" startOffset="50%" text-anchor="middle">ROTARY</textPath>
+  </text>
+  <text font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="10.5" fill="url(#goldGrad)" letter-spacing="1.5">
+    <textPath href="#lowerArc" startOffset="50%" text-anchor="middle">INTERNATIONAL</textPath>
+  </text>
+
+  <!-- Inner Rim -->
+  <circle cx="100" cy="100" r="56" fill="url(#goldGrad)" />
+  <circle cx="100" cy="100" r="50" fill="url(#blueGrad)" />
+
+  <!-- 6 Spokes -->
+  <g fill="url(#goldGrad)">
+    <rect x="95" y="50" width="10" height="40" transform="rotate(0 100 100)" />
+    <rect x="95" y="50" width="10" height="40" transform="rotate(60 100 100)" />
+    <rect x="95" y="50" width="10" height="40" transform="rotate(120 100 100)" />
+    <rect x="95" y="50" width="10" height="40" transform="rotate(180 100 100)" />
+    <rect x="95" y="50" width="10" height="40" transform="rotate(240 100 100)" />
+    <rect x="95" y="50" width="10" height="40" transform="rotate(300 100 100)" />
+  </g>
+
+  <!-- Hub and Keyway -->
+  <circle cx="100" cy="100" r="22" fill="url(#goldGrad)" />
+  <circle cx="100" cy="100" r="14" fill="url(#blueGrad)" />
+  <!-- Keyway Notch -->
+  <rect x="97" y="82" width="6" height="8" fill="url(#blueGrad)" />
+  <circle cx="100" cy="100" r="8" fill="#FFFFFF" opacity="0.15" />
+</svg>
