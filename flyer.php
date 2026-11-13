@@ -1,8 +1,9 @@
 <?php
 /**
  * Rotary Club of Asokoro — District 9125, Nigeria
- * 2027/2028 Officers Election — Official Election Guideline Flyer
- * Features scannable QR Code & direct link to https://bit.ly/4AjHI16
+ * 2027/2028 Officers Election — Official Election Guideline & Procedure Infographic Flyer
+ * Modeled after the official election procedure infographic format with a central serpentine roadmap,
+ * alternating numbered step nodes, QR code, and direct link to https://bit.ly/4AjHI16.
  */
 require_once __DIR__ . '/config.php';
 
@@ -13,14 +14,14 @@ $shortUrl = "https://bit.ly/4AjHI16";
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Official Election Guidelines Flyer — Rotary Club of Asokoro</title>
-  <meta name="description" content="Official Notice and Guidelines Flyer for the 2027/2028 Rotary Club of Asokoro Officers Election. Scan QR code or visit https://bit.ly/4AjHI16 to apply.">
-  
+  <title>Election Guideline & Procedure Flyer — Rotary Club of Asokoro</title>
+  <meta name="description" content="Official Step-by-Step Election Guideline and Voting Procedure Infographic for the 2027/2028 Rotary Club of Asokoro Officers Election. Scan QR code or visit https://bit.ly/4AjHI16 to fill the form.">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <!-- QRCode.js & html2canvas for instant export -->
   <script src="assets/js/qrcode.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -29,16 +30,17 @@ $shortUrl = "https://bit.ly/4AjHI16";
     :root {
       --rc-navy: #00246C;
       --rc-navy-dark: #071530;
-      --rc-navy-deeper: #030B1A;
+      --rc-navy-light: #0A328C;
       --rc-gold: #F7A81B;
       --rc-gold-light: #FFD15C;
       --rc-gold-dark: #C88500;
-      --rc-gold-metallic: linear-gradient(135deg, #FFE899 0%, #F7A81B 45%, #D48800 80%, #FFF2B2 100%);
+      --rc-gold-grad: linear-gradient(135deg, #FFE899 0%, #F7A81B 50%, #D48800 100%);
+      --rc-green: #059669;
       --rc-cranberry: #D91B5C;
-      --rc-sky: #0099FF;
-      --rc-white: #FFFFFF;
-      --rc-text-muted: #94A3B8;
-      --rc-border-gold: rgba(247, 168, 27, 0.45);
+      --rc-slate-dark: #0F172A;
+      --rc-slate-body: #1E293B;
+      --rc-slate-muted: #64748B;
+      --rc-bg-light: #F8FAFC;
     }
 
     * {
@@ -50,22 +52,22 @@ $shortUrl = "https://bit.ly/4AjHI16";
     body {
       background: #0B132B;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      color: #FFFFFF;
+      color: #0F172A;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px 16px 40px 16px;
+      padding: 24px 16px 50px 16px;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Floating Toolbar */
+    /* TOP ACTION TOOLBAR */
     .flyer-toolbar {
-      max-width: 860px;
+      max-width: 880px;
       width: 100%;
-      background: rgba(7, 21, 48, 0.85);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(247, 168, 27, 0.3);
+      background: rgba(7, 21, 48, 0.9);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(247, 168, 27, 0.35);
       border-radius: 14px;
       padding: 12px 20px;
       margin-bottom: 24px;
@@ -74,7 +76,7 @@ $shortUrl = "https://bit.ly/4AjHI16";
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       z-index: 50;
     }
 
@@ -82,8 +84,8 @@ $shortUrl = "https://bit.ly/4AjHI16";
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 0.92rem;
+      font-weight: 800;
       color: var(--rc-gold);
     }
 
@@ -101,7 +103,7 @@ $shortUrl = "https://bit.ly/4AjHI16";
       padding: 8px 16px;
       border-radius: 8px;
       font-size: 0.84rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -115,485 +117,573 @@ $shortUrl = "https://bit.ly/4AjHI16";
       transform: translateY(-1px);
     }
     .btn-tool.primary {
-      background: var(--rc-gold-metallic);
+      background: var(--rc-gold-grad);
       color: #071530;
       border: none;
-      font-weight: 800;
+      font-weight: 900;
     }
     .btn-tool.primary:hover {
       filter: brightness(1.08);
-      box-shadow: 0 4px 15px rgba(247, 168, 27, 0.35);
+      box-shadow: 0 4px 15px rgba(247, 168, 27, 0.4);
     }
 
-    /* THE FLYER CANVAS (Standard A4 / Poster Aspect Ratio) */
+    /* THE FLYER CANVAS (Clean White Infographic Poster) */
     .flyer-poster {
       width: 100%;
-      max-width: 860px;
-      background: radial-gradient(circle at 50% 20%, #0F2D6B 0%, #071530 50%, #030B1A 100%);
-      border: 2px solid #D4AF37;
-      border-radius: 12px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 36, 108, 0.5);
+      max-width: 880px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(247, 168, 27, 0.25);
       position: relative;
       overflow: hidden;
-      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Ornate Gold Framing */
-    .flyer-inner-frame {
-      border: 1px solid rgba(247, 168, 27, 0.5);
-      border-radius: 8px;
-      padding: 24px 28px;
+    /* TOP CURVED HERO HEADER (Matching Reference Style) */
+    .flyer-hero-header {
+      background: linear-gradient(135deg, #071530 0%, #00246C 70%, #05338E 100%);
+      color: #FFFFFF;
+      padding: 32px 36px 36px 36px;
       position: relative;
-      background: rgba(3, 11, 26, 0.35);
+      overflow: hidden;
     }
-    .flyer-inner-frame::before {
+    .flyer-hero-header::after {
       content: "";
       position: absolute;
-      top: 4px; left: 4px; right: 4px; bottom: 4px;
-      border: 1px dashed rgba(247, 168, 27, 0.25);
-      border-radius: 6px;
+      bottom: -30px;
+      right: -30px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(247, 168, 27, 0.18) 0%, transparent 70%);
+      border-radius: 50%;
       pointer-events: none;
     }
 
-    /* Corner Flourishes */
-    .corner-dec {
-      position: absolute;
-      width: 24px;
-      height: 24px;
-      border-color: #F7A81B;
-      border-style: solid;
-      pointer-events: none;
+    /* Header decorative yellow road dash stripe */
+    .header-dash-stripe {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
     }
-    .corner-tl { top: -2px; left: -2px; border-width: 3px 0 0 3px; }
-    .corner-tr { top: -2px; right: -2px; border-width: 3px 3px 0 0; }
-    .corner-bl { bottom: -2px; left: -2px; border-width: 0 0 3px 3px; }
-    .corner-br { bottom: -2px; right: -2px; border-width: 0 3px 3px 0; }
-
-    /* Watermark */
-    .flyer-watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 520px;
-      height: 520px;
-      opacity: 0.04;
-      pointer-events: none;
-      z-index: 1;
+    .header-dash-stripe span {
+      height: 4px;
+      width: 28px;
+      background: var(--rc-gold);
+      border-radius: 2px;
     }
 
-    /* FLYER HEADER */
-    .flyer-header {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(247, 168, 27, 0.25);
+    .hero-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
     }
 
-    .flyer-top-brand {
+    .hero-title-group {
+      flex: 1;
+    }
+    .hero-tag {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--rc-gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 12px;
+      gap: 8px;
     }
-    .flyer-logo {
-      width: 64px;
-      height: 64px;
-      filter: drop-shadow(0 0 12px rgba(247, 168, 27, 0.5));
-    }
-    .flyer-org-sub {
-      font-size: 0.78rem;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: #94A3B8;
-      font-weight: 700;
-    }
-    .flyer-club-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1.85rem;
-      font-weight: 800;
+    .hero-main-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.35rem;
+      font-weight: 900;
       color: #FFFFFF;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-      line-height: 1.15;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
-    .flyer-club-badge {
-      display: inline-block;
+    .hero-main-title span {
+      color: var(--rc-gold);
+    }
+    .hero-sub-title {
+      font-size: 0.95rem;
+      color: #E2E8F0;
+      margin-top: 6px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* Rotary Brand Badge Top Right */
+    .hero-brand-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(247, 168, 27, 0.4);
+      padding: 12px 16px;
+      border-radius: 12px;
+      min-width: 140px;
+    }
+    .hero-brand-badge img {
+      width: 58px;
+      height: 58px;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+      margin-bottom: 6px;
+    }
+    .hero-club-name {
       font-size: 0.76rem;
       font-weight: 800;
-      letter-spacing: 1.5px;
-      color: var(--rc-gold);
-      background: rgba(247, 168, 27, 0.12);
-      border: 1px solid rgba(247, 168, 27, 0.35);
-      padding: 3px 14px;
-      border-radius: 20px;
-      margin-top: 4px;
-      text-transform: uppercase;
-    }
-
-    /* Main Ribbon Title */
-    .flyer-notice-badge {
-      display: inline-block;
-      margin: 12px auto 6px auto;
-      background: var(--rc-gold-metallic);
-      color: #071530;
-      padding: 6px 26px;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 900;
-      font-size: 1.05rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      border-radius: 4px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    }
-    .flyer-election-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.55rem;
-      font-weight: 800;
       color: #FFFFFF;
-      margin-top: 4px;
       letter-spacing: 0.5px;
-    }
-    .flyer-preamble {
-      font-style: italic;
-      color: #CBD5E1;
-      font-size: 0.84rem;
-      margin-top: 6px;
-      max-width: 680px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .flyer-preamble strong {
-      color: var(--rc-gold);
-    }
-
-    /* FOUR-WAY TEST MINI-STRIP */
-    .four-way-strip {
-      background: rgba(0, 36, 108, 0.5);
-      border: 1px solid rgba(247, 168, 27, 0.3);
-      border-radius: 6px;
-      padding: 8px 14px;
-      margin: 12px 0 18px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      gap: 8px;
-      flex-wrap: wrap;
-      font-size: 0.74rem;
-      color: #E2E8F0;
-      position: relative;
-      z-index: 2;
-    }
-    .fwt-title {
-      font-weight: 800;
-      color: var(--rc-gold);
-      letter-spacing: 0.8px;
       text-transform: uppercase;
+      line-height: 1.2;
     }
-    .fwt-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .fwt-item span {
+    .hero-district {
+      font-size: 0.65rem;
       color: var(--rc-gold);
       font-weight: 700;
-    }
-
-    /* 2-COLUMN MAIN CONTENT */
-    .flyer-grid {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    /* Section Boxes */
-    .flyer-box {
-      background: rgba(7, 21, 48, 0.65);
-      border: 1px solid rgba(247, 168, 27, 0.3);
-      border-radius: 8px;
-      padding: 14px 16px;
-      box-shadow: inset 0 0 15px rgba(0, 36, 108, 0.2);
-    }
-
-    .box-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.96rem;
-      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--rc-gold);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid rgba(247, 168, 27, 0.2);
-    }
-    .box-title svg {
-      color: var(--rc-gold);
+      letter-spacing: 1px;
     }
 
-    /* Elective Offices List */
-    .offices-list {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 6px;
-    }
-    .office-item {
+    /* FOUR-WAY TEST SLOGAN STRIP */
+    .hero-fwt-strip {
+      background: #F1F5F9;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 10px 36px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 5px 8px;
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 5px;
-      border-left: 3px solid var(--rc-gold);
+      gap: 12px;
+      flex-wrap: wrap;
       font-size: 0.8rem;
+      color: #334155;
     }
-    .office-name {
-      font-weight: 700;
-      color: #FFFFFF;
+    .fwt-lead {
+      font-weight: 800;
+      color: var(--rc-navy);
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
+      text-transform: uppercase;
+      font-size: 0.76rem;
+      letter-spacing: 0.8px;
     }
-    .office-tag {
-      font-size: 0.68rem;
-      color: var(--rc-gold);
-      background: rgba(247, 168, 27, 0.15);
-      padding: 2px 6px;
-      border-radius: 4px;
+    .fwt-item-pill {
+      display: flex;
+      align-items: center;
+      gap: 4px;
       font-weight: 600;
     }
-
-    /* Key Dates Timeline */
-    .timeline-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .timeline-item {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      font-size: 0.78rem;
-      padding: 6px 8px;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 6px;
-    }
-    .timeline-item.urgent {
-      background: rgba(217, 27, 92, 0.18);
-      border-left: 3px solid var(--rc-cranberry);
-    }
-    .timeline-item.election-day {
-      background: rgba(247, 168, 27, 0.15);
-      border-left: 3px solid var(--rc-gold);
-    }
-    .tl-date {
-      font-weight: 800;
-      color: var(--rc-gold);
-      min-width: 90px;
-      line-height: 1.25;
-      font-size: 0.74rem;
-    }
-    .timeline-item.urgent .tl-date {
-      color: #FF6B8B;
-    }
-    .tl-desc {
-      color: #E2E8F0;
-      line-height: 1.25;
-    }
-    .tl-desc strong {
-      color: #FFFFFF;
-    }
-
-    /* Aspirant Requirements Summary */
-    .req-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 0.76rem;
-      color: #CBD5E1;
-      margin-top: 6px;
-    }
-    .req-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 6px;
-    }
-    .req-list li::before {
-      content: "✔";
-      color: var(--rc-gold);
-      font-weight: 800;
-    }
-
-    /* DIGITAL SUBMISSION CALLOUT & QR CODE (HERO ELEMENT) */
-    .qr-callout-card {
-      background: linear-gradient(145deg, #071530 0%, #00246C 100%);
-      border: 2px solid var(--rc-gold);
-      border-radius: 10px;
-      padding: 16px 14px;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(247, 168, 27, 0.2);
-      display: flex;
-      flex-direction: column;
+    .fwt-num {
+      background: var(--rc-gold);
+      color: #071530;
+      font-weight: 900;
+      font-size: 0.7rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 100%;
     }
 
-    .qr-badge-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #071530;
-      background: var(--rc-gold-metallic);
-      padding: 4px 16px;
-      border-radius: 20px;
-      margin-bottom: 12px;
-      display: inline-block;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    /* QR Code Display Frame */
-    .qr-frame {
+    /* =========================================================================
+       CENTRAL SERPENTINE ROADMAP (Matching the Reference Infographic Flow)
+       ========================================================================= */
+    .infographic-body {
+      padding: 36px 36px 28px 36px;
       background: #FFFFFF;
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-      display: inline-block;
-      margin-bottom: 12px;
-      border: 3px solid #D4AF37;
       position: relative;
     }
-    #flyer-qrcode img,
-    #flyer-qrcode canvas {
-      display: block;
-      margin: 0 auto;
-    }
-    .qr-center-badge {
+
+    /* Subtle background watermark */
+    .infographic-watermark {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      width: 480px;
+      height: 480px;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Roadmap Container */
+    .serpentine-roadmap {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Central Connecting Line (Visible between nodes on desktop) */
+    .serpentine-roadmap::before {
+      content: "";
+      position: absolute;
+      top: 30px;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      background: linear-gradient(180deg, #F7A81B 0%, #00246C 50%, #F7A81B 100%);
+      border-radius: 3px;
+      z-index: 1;
+    }
+
+    /* Step Row (Alternating Left & Right) */
+    .step-row {
+      display: grid;
+      grid-template-columns: 1fr 90px 1fr;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Text Card */
+    .step-text-card {
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 4px 15px -3px rgba(0, 36, 108, 0.07);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .step-text-card:hover {
+      box-shadow: 0 8px 25px -4px rgba(0, 36, 108, 0.12);
+      border-color: var(--rc-gold);
+    }
+    .step-text-card.left-card {
+      text-align: right;
+      margin-right: 12px;
+    }
+    .step-text-card.right-card {
+      text-align: left;
+      margin-left: 12px;
+    }
+
+    .step-main-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #071530;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .step-main-title span.highlight-deadline {
+      color: #DC2626;
+    }
+    .step-main-title span.highlight-election {
+      color: #00246C;
+    }
+
+    .step-date-badge {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--rc-navy);
+      background: rgba(0, 36, 108, 0.08);
+      padding: 3px 9px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .step-date-badge.urgent {
+      background: #FEE2E2;
+      color: #DC2626;
+      font-weight: 900;
+    }
+    .step-date-badge.election {
+      background: #FEF3C7;
+      color: #B45309;
+      font-weight: 900;
+    }
+
+    .step-desc {
+      font-size: 0.82rem;
+      color: #475569;
+      line-height: 1.35;
+    }
+    .step-desc strong {
+      color: #0F172A;
+    }
+
+    /* Central Node Circle with Icon & Number */
+    .step-node-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .step-circle {
+      width: 72px;
+      height: 72px;
+      background: #FFFFFF;
+      border: 3px solid #E2E8F0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0, 36, 108, 0.12);
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+    .step-row:hover .step-circle {
+      transform: scale(1.06);
+    }
+    .step-circle.gold-border {
+      border-color: var(--rc-gold);
+    }
+    .step-circle.blue-border {
+      border-color: var(--rc-navy);
+    }
+    .step-circle.red-border {
+      border-color: var(--rc-cranberry);
+    }
+
+    .step-icon-svg {
       width: 32px;
       height: 32px;
+    }
+
+    /* Number badge attached to node */
+    .step-num-badge {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      color: #FFFFFF;
+      font-weight: 900;
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+      border: 2px solid #FFFFFF;
+    }
+    .num-pos-left {
+      bottom: -2px;
+      left: -2px;
+    }
+    .num-pos-right {
+      bottom: -2px;
+      right: -2px;
+    }
+
+    .bg-gold { background: var(--rc-gold-dark); }
+    .bg-navy { background: var(--rc-navy); }
+    .bg-red { background: #DC2626; }
+    .bg-green { background: #059669; }
+
+    /* Empty Column Placeholders */
+    .step-empty-col {
+      visibility: hidden;
+    }
+
+    /* =========================================================================
+       BOTTOM SECTION: QR CODE & DATES PILLS (Matching the Reference)
+       ========================================================================= */
+    .infographic-bottom {
+      border-top: 2px dashed #E2E8F0;
+      padding-top: 24px;
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 24px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* QR Code Card (Left) */
+    .qr-card-box {
+      background: linear-gradient(135deg, #071530 0%, #00246C 100%);
+      color: #FFFFFF;
+      border-radius: 14px;
+      padding: 16px 18px;
+      border: 2px solid var(--rc-gold);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 25px rgba(0, 36, 108, 0.25);
+    }
+
+    .qr-render-frame {
+      background: #FFFFFF;
+      padding: 6px;
+      border-radius: 8px;
+      border: 2px solid var(--rc-gold);
+      display: inline-block;
+      flex-shrink: 0;
+      position: relative;
+    }
+    #infographic-qr img,
+    #infographic-qr canvas {
+      display: block;
+    }
+    .qr-center-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
       background: #FFFFFF;
       border-radius: 50%;
-      padding: 3px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      padding: 2px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
-    .qr-center-badge img {
+    .qr-center-logo img {
       width: 100%;
       height: 100%;
     }
 
-    .qr-url-display {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.15rem;
+    .qr-content-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .qr-title-badge {
+      font-size: 0.68rem;
       font-weight: 800;
-      color: #FFFFFF;
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px dashed var(--rc-gold);
-      padding: 6px 14px;
-      border-radius: 6px;
+      color: #071530;
+      background: var(--rc-gold);
+      padding: 2px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 6px;
+      display: inline-block;
+      align-self: flex-start;
+    }
+    .qr-subtext {
+      font-size: 0.8rem;
+      color: #E2E8F0;
+      line-height: 1.3;
+    }
+    .qr-link-btn {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px dashed var(--rc-gold);
+      padding: 4px 10px;
+      border-radius: 6px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      margin-top: 4px;
+      width: fit-content;
       transition: all 0.2s ease;
     }
-    .qr-url-display:hover {
-      background: rgba(247, 168, 27, 0.15);
+    .qr-link-btn:hover {
+      background: var(--rc-gold);
+      color: #071530;
       border-color: #FFFFFF;
-      color: var(--rc-gold);
-    }
-    .qr-instructions {
-      font-size: 0.74rem;
-      color: #CBD5E1;
-      line-height: 1.3;
-      max-width: 220px;
-      margin: 0 auto;
     }
 
-    /* FLYER FOOTER SIGN-OFF */
-    .flyer-footer {
-      position: relative;
-      z-index: 2;
-      border-top: 1px solid rgba(247, 168, 27, 0.3);
-      padding-top: 14px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 16px;
-      text-align: center;
-    }
-
-    .footer-signer {
-      text-align: center;
-    }
-    .signer-name {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 800;
-      color: var(--rc-gold);
-    }
-    .signer-title {
-      font-size: 0.72rem;
-      color: #94A3B8;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .footer-motto-seal {
+    /* Key Dates Pill Cards (Right, Matching Reference Style) */
+    .date-pills-col {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 4px;
+      gap: 12px;
     }
-    .seal-circle-mini {
+
+    .date-pill {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px;
+      border-radius: 40px;
+      color: #FFFFFF;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .date-pill.pill-red {
+      background: linear-gradient(135deg, #991B1B 0%, #DC2626 100%);
+    }
+    .date-pill.pill-navy {
+      background: linear-gradient(135deg, #071530 0%, #00246C 100%);
+      border: 1.5px solid var(--rc-gold);
+    }
+
+    .pill-icon-box {
       width: 44px;
       height: 44px;
-      border: 2px dashed var(--rc-gold);
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.55rem;
-      font-weight: 900;
-      text-align: center;
-      color: var(--rc-gold);
-      background: rgba(247, 168, 27, 0.1);
-      line-height: 1;
+      flex-shrink: 0;
     }
-    .motto-text {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 0.8rem;
-      color: #FFFFFF;
-      letter-spacing: 0.5px;
+    .pill-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      opacity: 0.9;
+      font-weight: 700;
+    }
+    .pill-date {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      line-height: 1.15;
+    }
+
+    /* FOOTER SIGN-OFF */
+    .infographic-footer {
+      background: #F1F5F9;
+      border-top: 1px solid #E2E8F0;
+      padding: 14px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: #64748B;
+    }
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .footer-left strong {
+      color: #0F172A;
+      font-size: 0.82rem;
+    }
+    .footer-right {
+      text-align: right;
+    }
+    .footer-right .motto {
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      color: var(--rc-navy);
+      font-size: 0.82rem;
     }
 
     /* Toast Notification */
     .toast-msg {
       position: fixed;
       bottom: 24px;
-      background: var(--rc-gold-metallic);
+      background: var(--rc-gold-grad);
       color: #071530;
-      font-weight: 800;
+      font-weight: 900;
       padding: 10px 24px;
       border-radius: 30px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.4);
@@ -607,11 +697,10 @@ $shortUrl = "https://bit.ly/4AjHI16";
       transform: translateY(0);
     }
 
-    /* PRINT STYLING (A4 Clean Fit) */
+    /* PRINT STYLES */
     @media print {
       body {
         background: #FFFFFF !important;
-        color: #071530 !important;
         padding: 0 !important;
         margin: 0 !important;
       }
@@ -620,109 +709,70 @@ $shortUrl = "https://bit.ly/4AjHI16";
       }
       .flyer-poster {
         max-width: 100% !important;
-        width: 100% !important;
-        border: 2px solid #00246C !important;
-        border-radius: 0 !important;
         box-shadow: none !important;
-        padding: 20px 24px !important;
-        background: #FFFFFF !important;
-        color: #071530 !important;
+        border: none !important;
+        border-radius: 0 !important;
         page-break-inside: avoid;
-      }
-      .flyer-inner-frame {
-        border-color: #00246C !important;
-        background: transparent !important;
-      }
-      .flyer-club-title, .flyer-election-title {
-        color: #00246C !important;
-        text-shadow: none !important;
-      }
-      .flyer-preamble {
-        color: #334155 !important;
-      }
-      .flyer-preamble strong, .fwt-title, .box-title, .signer-name {
-        color: #00246C !important;
-      }
-      .four-way-strip {
-        background: #F1F5F9 !important;
-        color: #071530 !important;
-        border-color: #CBD5E1 !important;
-      }
-      .flyer-box {
-        background: #F8FAFC !important;
-        border-color: #CBD5E1 !important;
-        color: #071530 !important;
-      }
-      .office-item {
-        background: #FFFFFF !important;
-        color: #071530 !important;
-        border-left-color: #00246C !important;
-      }
-      .office-name {
-        color: #071530 !important;
-      }
-      .timeline-item {
-        background: #FFFFFF !important;
-        color: #071530 !important;
-      }
-      .timeline-item.urgent {
-        background: #FEE2E2 !important;
-        border-left-color: #DC2626 !important;
-      }
-      .timeline-item.election-day {
-        background: #FEF3C7 !important;
-        border-left-color: #D97706 !important;
-      }
-      .tl-date, .tl-desc strong {
-        color: #00246C !important;
-      }
-      .timeline-item.urgent .tl-date {
-        color: #DC2626 !important;
-      }
-      .qr-callout-card {
-        background: #F8FAFC !important;
-        border-color: #00246C !important;
-        color: #071530 !important;
-      }
-      .qr-url-display {
-        color: #00246C !important;
-        background: #FFFFFF !important;
-        border-color: #00246C !important;
-      }
-      .qr-instructions {
-        color: #475569 !important;
       }
       @page {
         size: A4 portrait;
-        margin: 8mm;
+        margin: 6mm;
       }
     }
 
-    /* Mobile Responsive */
+    /* MOBILE RESPONSIVE (Switch to clean linear stack) */
     @media (max-width: 768px) {
-      .flyer-poster {
-        padding: 20px 14px;
+      .flyer-hero-header {
+        padding: 24px 20px;
       }
-      .flyer-inner-frame {
-        padding: 16px 12px;
+      .hero-main-title {
+        font-size: 1.65rem;
       }
-      .flyer-club-title {
-        font-size: 1.45rem;
+      .hero-top-row {
+        flex-direction: column;
       }
-      .flyer-election-title {
-        font-size: 1.25rem;
+      .hero-brand-badge {
+        flex-direction: row;
+        width: 100%;
+        justify-content: flex-start;
+        text-align: left;
+        gap: 12px;
       }
-      .flyer-grid {
+      .infographic-body {
+        padding: 24px 16px;
+      }
+      .serpentine-roadmap::before {
+        left: 36px;
+      }
+      .step-row {
+        grid-template-columns: 72px 1fr;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .step-empty-col {
+        display: none;
+      }
+      .step-text-card.left-card,
+      .step-text-card.right-card {
+        text-align: left;
+        margin: 0;
+      }
+      .step-row:nth-child(even) .step-text-card {
+        order: 2;
+      }
+      .step-row:nth-child(even) .step-node-center {
+        order: 1;
+      }
+      .infographic-bottom {
         grid-template-columns: 1fr;
-        gap: 16px;
       }
-      .four-way-strip {
+      .infographic-footer {
+        padding: 14px 20px;
         flex-direction: column;
         align-items: flex-start;
       }
-      .flyer-footer {
-        grid-template-columns: 1fr;
-        gap: 12px;
+      .footer-right {
+        text-align: left;
       }
     }
   </style>
@@ -733,7 +783,7 @@ $shortUrl = "https://bit.ly/4AjHI16";
   <div class="flyer-toolbar">
     <div class="toolbar-brand">
       <img src="assets/images/rotary-wheel.svg" width="28" height="28" alt="Rotary Wheel">
-      <span>Official Election Flyer</span>
+      <span>Election Procedure Infographic Flyer</span>
     </div>
 
     <div class="toolbar-actions">
@@ -764,208 +814,274 @@ $shortUrl = "https://bit.ly/4AjHI16";
     </div>
   </div>
 
-  <!-- THE OFFICIAL PRINTABLE & EXPORTABLE FLYER -->
+  <!-- THE INFOGRAPHIC FLYER (Modeled after Election Procedure Reference) -->
   <div class="flyer-poster" id="flyerCapture">
-    <!-- Watermark Background -->
-    <img src="assets/images/rotary-wheel.svg" class="flyer-watermark" alt="Rotary Seal">
+    
+    <!-- HEADER SECTION -->
+    <header class="flyer-hero-header">
+      <div class="hero-top-row">
+        <div class="hero-title-group">
+          <div class="hero-tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            2027/2028 Officers Election
+          </div>
+          <h1 class="hero-main-title">ELECTION &amp; VOTING <span>PROCEDURE</span></h1>
+          <p class="hero-sub-title">Official Step-by-Step Guidelines &bull; Rotary Club of Asokoro, District 9125 Nigeria</p>
 
-    <div class="flyer-inner-frame">
-      <div class="corner-dec corner-tl"></div>
-      <div class="corner-dec corner-tr"></div>
-      <div class="corner-dec corner-bl"></div>
-      <div class="corner-dec corner-br"></div>
-
-      <!-- HEADER -->
-      <header class="flyer-header">
-        <div class="flyer-top-brand">
-          <img src="assets/images/rotary-wheel.svg" class="flyer-logo" alt="Rotary Wheel">
-          <div>
-            <div class="flyer-org-sub">Rotary International &bull; District 9125, Nigeria</div>
-            <h1 class="flyer-club-title">ROTARY CLUB OF ASOKORO</h1>
-            <div class="flyer-club-badge">Chartered Club &bull; "The Pace Setter"</div>
+          <div class="header-dash-stripe">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
         </div>
 
-        <div class="flyer-notice-badge">Official Notice &amp; Election Guidelines</div>
-        <h2 class="flyer-election-title">2027/2028 OFFICERS ELECTION</h2>
+        <div class="hero-brand-badge">
+          <img src="assets/images/rotary-wheel.svg" alt="Rotary Wheel">
+          <div class="hero-club-name">Rotary Club of Asokoro</div>
+          <div class="hero-district">"The Pace Setter"</div>
+        </div>
+      </div>
+    </header>
 
-        <p class="flyer-preamble">
-          The embargo on election activities is hereby lifted pursuant to the Rotary International Constitution &amp; Club Bye-Laws.
-          <strong>"No preferred candidates, only preferred processes."</strong>
-        </p>
-      </header>
+    <!-- FOUR-WAY TEST BANNER -->
+    <div class="hero-fwt-strip">
+      <div class="fwt-lead">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        The Four-Way Test:
+      </div>
+      <div class="fwt-item-pill"><span class="fwt-num">1</span> Is it the TRUTH?</div>
+      <div class="fwt-item-pill"><span class="fwt-num">2</span> FAIR to all concerned?</div>
+      <div class="fwt-item-pill"><span class="fwt-num">3</span> Goodwill &amp; Better Friendships?</div>
+      <div class="fwt-item-pill"><span class="fwt-num">4</span> BENEFICIAL to all concerned?</div>
+    </div>
 
-      <!-- FOUR-WAY TEST BANNER -->
-      <div class="four-way-strip">
-        <div class="fwt-title">The Four-Way Test:</div>
-        <div class="fwt-item"><span>1.</span> Is it the TRUTH?</div>
-        <div class="fwt-item"><span>2.</span> Is it FAIR to all concerned?</div>
-        <div class="fwt-item"><span>3.</span> Goodwill &amp; Better Friendships?</div>
-        <div class="fwt-item"><span>4.</span> BENEFICIAL to all concerned?</div>
+    <!-- INFOGRAPHIC ROADMAP BODY -->
+    <div class="infographic-body">
+      <!-- Watermark -->
+      <img src="assets/images/rotary-wheel.svg" class="infographic-watermark" alt="Rotary Emblem">
+
+      <div class="serpentine-roadmap">
+        
+        <!-- STEP 01 (Left) -->
+        <div class="step-row">
+          <div class="step-text-card left-card">
+            <span class="step-date-badge">Wed, 11th Nov 2026</span>
+            <h3 class="step-main-title">Form Submissions Commence</h3>
+            <p class="step-desc">Official notice issued and online Expression of Interest opens for all <strong>8 Elective Offices</strong> via portal.</p>
+          </div>
+          <div class="step-node-center">
+            <div class="step-circle gold-border">
+              <!-- Megaphone / Announce Icon -->
+              <svg class="step-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#F7A81B" stroke-width="2.2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <div class="step-num-badge bg-gold num-pos-left">01</div>
+            </div>
+          </div>
+          <div class="step-empty-col"></div>
+        </div>
+
+        <!-- STEP 02 (Right) -->
+        <div class="step-row">
+          <div class="step-empty-col"></div>
+          <div class="step-node-center">
+            <div class="step-circle blue-border">
+              <!-- Register / List Check Icon -->
+              <svg class="step-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#00246C" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-4"/></svg>
+              <div class="step-num-badge bg-navy num-pos-right">02</div>
+            </div>
+          </div>
+          <div class="step-text-card right-card">
+            <span class="step-date-badge">Wed, 18th Nov 2026</span>
+            <h3 class="step-main-title">Voters Register &amp; Dues Cutoff</h3>
+            <p class="step-desc">Club financial standing cutoff. Members must have <strong>all club dues fully paid</strong> to endorse or vote.</p>
+          </div>
+        </div>
+
+        <!-- STEP 03 (Left - URGENT DEADLINE) -->
+        <div class="step-row">
+          <div class="step-text-card left-card" style="border-left: 3px solid #DC2626;">
+            <span class="step-date-badge urgent">Strict Cut-Off &bull; 5:00 PM Prompt</span>
+            <h3 class="step-main-title"><span class="highlight-deadline">Nominations Submission Ends</span></h3>
+            <p class="step-desc">Strict deadline for submission of nomination forms, passport photos, dues evidence, and manifestos.</p>
+          </div>
+          <div class="step-node-center">
+            <div class="step-circle red-border">
+              <!-- Clock / Alarm Icon -->
+              <svg class="step-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <div class="step-num-badge bg-red num-pos-left">03</div>
+            </div>
+          </div>
+          <div class="step-empty-col"></div>
+        </div>
+
+        <!-- STEP 04 (Right) -->
+        <div class="step-row">
+          <div class="step-empty-col"></div>
+          <div class="step-node-center">
+            <div class="step-circle gold-border">
+              <!-- Magnifying Glass / Vetting Icon -->
+              <svg class="step-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#F7A81B" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="M11 8v6M8 11h6"/></svg>
+              <div class="step-num-badge bg-gold num-pos-right">04</div>
+            </div>
+          </div>
+          <div class="step-text-card right-card">
+            <span class="step-date-badge">Sat, 21st Nov 2026 &bull; 11:00 AM – 2:00 PM</span>
+            <h3 class="step-main-title">Candidate Screening</h3>
+            <p class="step-desc">Confidential vetting of aspirants: membership tenure, meeting attendance, financial status, and RLI training.</p>
+          </div>
+        </div>
+
+        <!-- STEP 05 (Left) -->
+        <div class="step-row">
+          <div class="step-text-card left-card">
+            <span class="step-date-badge">Sun, 22nd Nov 2026</span>
+            <h3 class="step-main-title">Publication of Cleared Candidates</h3>
+            <p class="step-desc">Electoral Committee officially publishes the final list of cleared and qualified candidates across club channels.</p>
+          </div>
+          <div class="step-node-center">
+            <div class="step-circle blue-border">
+              <!-- User Check / Publication Icon -->
+              <svg class="step-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#00246C" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+              <div class="step-num-badge bg-navy num-pos-left">05</div>
+            </div>
+          </div>
+          <div class="step-empty-col"></div>
+        </div>
+
+        <!-- STEP 06 (Right) -->
+        <div class="step-row">
+          <div class="step-empty-col"></div>
+          <div class="step-node-center">
+            <div class="step-circle green-border" style="border-color: #059669;">
+              <!-- ID Card / Accreditation Icon -->
+              <svg class="step-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <div class="step-num-badge bg-green num-pos-right">06</div>
+            </div>
+          </div>
+          <div class="step-text-card right-card">
+            <span class="step-date-badge election">Wed, 25th Nov 2026 &bull; 5:00 PM – 6:00 PM</span>
+            <h3 class="step-main-title">Accreditation of Eligible Voters</h3>
+            <p class="step-desc">Physical accreditation at <strong>Stratton Suite, Asokoro, Abuja</strong>. Verification against the Voters Register. <em>No proxy voting</em>.</p>
+          </div>
+        </div>
+
+        <!-- STEP 07 (Left) -->
+        <div class="step-row">
+          <div class="step-text-card left-card" style="border-left: 3px solid #00246C;">
+            <span class="step-date-badge election">Wed, 25th Nov 2026 &bull; 6:00 PM – 8:30 PM</span>
+            <h3 class="step-main-title"><span class="highlight-election">Secret Ballot Voting</span></h3>
+            <p class="step-desc">Accredited voters cast secret ballots inside the voting cubicle and deposit them into the transparent ballot box.</p>
+          </div>
+          <div class="step-node-center">
+            <div class="step-circle blue-border">
+              <!-- Ballot Box Icon -->
+              <svg class="step-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#00246C" stroke-width="2.2"><path d="M19 11v9H5v-9"/><path d="M21 4H3v7h18V4z"/><path d="M10 4V1h4v3"/></svg>
+              <div class="step-num-badge bg-navy num-pos-left">07</div>
+            </div>
+          </div>
+          <div class="step-empty-col"></div>
+        </div>
+
+        <!-- STEP 08 (Right) -->
+        <div class="step-row">
+          <div class="step-empty-col"></div>
+          <div class="step-node-center">
+            <div class="step-circle gold-border">
+              <!-- Certificate / Return Award Icon -->
+              <svg class="step-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#F7A81B" stroke-width="2.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+              <div class="step-num-badge bg-gold num-pos-right">08</div>
+            </div>
+          </div>
+          <div class="step-text-card right-card">
+            <span class="step-date-badge election">Wed, 25th Nov 2026 &bull; Immediately after Polls</span>
+            <h3 class="step-main-title">Counting &amp; Declaration</h3>
+            <p class="step-desc">Open sorting and counting in presence of agents. Official declaration of winners &amp; <strong>Certificates of Return</strong> presented.</p>
+          </div>
+        </div>
+
       </div>
 
-      <!-- 2-COLUMN BALANCED CONTENT -->
-      <div class="flyer-grid">
-        <!-- LEFT COLUMN: Elective Offices & Eligibility -->
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          <!-- Available Offices -->
-          <div class="flyer-box">
-            <h3 class="box-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              Available Elective Offices (8)
-            </h3>
-            <ul class="offices-list">
-              <li class="office-item">
-                <span class="office-name">👑 President-nominee</span>
-                <span class="office-tag">Board &amp; RLI Prereq</span>
-              </li>
-              <li class="office-item">
-                <span class="office-name">📜 Secretary</span>
-                <span class="office-tag">Club Records</span>
-              </li>
-              <li class="office-item">
-                <span class="office-name">💰 Treasurer</span>
-                <span class="office-tag">Treasury &amp; Dues</span>
-              </li>
-              <li class="office-item">
-                <span class="office-name">🤝 Club Service Chair</span>
-                <span class="office-tag">Fellowship &amp; Meetings</span>
-              </li>
-              <li class="office-item">
-                <span class="office-name">📣 Public Image Chair</span>
-                <span class="office-tag">Brand &amp; Media</span>
-              </li>
-              <li class="office-item">
-                <span class="office-name">🌐 Rotary Foundation Chair</span>
-                <span class="office-tag">TRF &amp; Giving</span>
-              </li>
-              <li class="office-item">
-                <span class="office-name">🌟 Youth Service Chair</span>
-                <span class="office-tag">Rotaract &amp; RYLA</span>
-              </li>
-              <li class="office-item">
-                <span class="office-name">🔨 Projects Chair</span>
-                <span class="office-tag">Community Service</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Aspirant Eligibility Checklist -->
-          <div class="flyer-box">
-            <h3 class="box-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-              Aspirant Guidelines Checklist
-            </h3>
-            <ul class="req-list">
-              <li><strong>Financial Standing:</strong> Fully paid club dues up to date.</li>
-              <li><strong>Club Membership:</strong> Minimum tenure prescribed in club Bye-Laws.</li>
-              <li><strong>Endorsement:</strong> Form duly signed by an eligible Proposer &amp; Seconder.</li>
-              <li><strong>Required Uploads:</strong> Passport photo, dues evidence &amp; manifesto.</li>
-              <li><strong>President-nominee:</strong> Past Board service + RLI Graduate required.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- RIGHT COLUMN: Timetable & Scannable QR Code -->
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          <!-- Key Timetable Dates -->
-          <div class="flyer-box">
-            <h3 class="box-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              Key Election Timetable
-            </h3>
-            <ul class="timeline-list">
-              <li class="timeline-item">
-                <div class="tl-date">Wed 11 Nov</div>
-                <div class="tl-desc">Collection &amp; submission of forms commence</div>
-              </li>
-              <li class="timeline-item urgent">
-                <div class="tl-date">Fri 20 Nov<br><span style="font-size: 0.68rem; font-weight: normal;">5:00 PM Prompt</span></div>
-                <div class="tl-desc"><strong>STRICT DEADLINE:</strong> Submissions close</div>
-              </li>
-              <li class="timeline-item">
-                <div class="tl-date">Wed 18 Nov</div>
-                <div class="tl-desc">Voters Register display &amp; dues cutoff</div>
-              </li>
-              <li class="timeline-item">
-                <div class="tl-date">Sat 21 Nov<br><span style="font-size: 0.68rem; font-weight: normal;">11 AM – 2 PM</span></div>
-                <div class="tl-desc">Screening of nominated candidates</div>
-              </li>
-              <li class="timeline-item">
-                <div class="tl-date">Sun 22 Nov</div>
-                <div class="tl-desc">Publication of final cleared candidates</div>
-              </li>
-              <li class="timeline-item election-day">
-                <div class="tl-date">Wed 25 Nov<br><span style="font-size: 0.68rem; font-weight: normal;">5:00 PM Prompt</span></div>
-                <div class="tl-desc"><strong>ELECTION DAY &amp; AGM:</strong> Stratton Suite, Asokoro, Abuja (In-Person Secret Ballot)</div>
-              </li>
-            </ul>
-          </div>
-
-          <!-- PROMINENT QR CODE & SHORT LINK CALLOUT -->
-          <div class="qr-callout-card">
-            <span class="qr-badge-title">Scan or Click to Submit Form</span>
-            
-            <div class="qr-frame">
-              <div id="flyer-qrcode"></div>
-              <div class="qr-center-badge">
-                <img src="assets/images/rotary-wheel.svg" alt="R">
-              </div>
+      <!-- BOTTOM CALLOUT: QR CODE & KEY DATES PILLS -->
+      <div class="infographic-bottom">
+        
+        <!-- Left: QR Code Card -->
+        <div class="qr-card-box">
+          <div class="qr-render-frame">
+            <div id="infographic-qr"></div>
+            <div class="qr-center-logo">
+              <img src="assets/images/rotary-wheel.svg" alt="R">
             </div>
+          </div>
 
-            <a href="<?php echo htmlspecialchars($shortUrl); ?>" target="_blank" rel="noopener noreferrer" class="qr-url-display">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <div class="qr-content-col">
+            <span class="qr-title-badge">Online Submission Form</span>
+            <p class="qr-subtext">Scan with your smartphone camera to access the official Expression of Interest portal:</p>
+            <a href="<?php echo htmlspecialchars($shortUrl); ?>" target="_blank" rel="noopener noreferrer" class="qr-link-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
               <?php echo htmlspecialchars($shortUrl); ?>
             </a>
+          </div>
+        </div>
 
-            <div class="qr-instructions">
-              Point your smartphone camera at the QR code or click the link above to submit your Expression of Interest.
+        <!-- Right: 2 Key Date Pills (Matching Reference Style) -->
+        <div class="date-pills-col">
+          <!-- Cut-Off Pill -->
+          <div class="date-pill pill-red">
+            <div class="pill-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="pill-title">Strict Nomination Cut-off</div>
+              <div class="pill-date">Friday 20th Nov 2026 (5:00 PM)</div>
+            </div>
+          </div>
+
+          <!-- Election Day Pill -->
+          <div class="date-pill pill-navy">
+            <div class="pill-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F7A81B" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div>
+              <div class="pill-title">AGM &amp; Officers Election Day</div>
+              <div class="pill-date">Wednesday 25th Nov 2026 (Stratton Suite)</div>
             </div>
           </div>
         </div>
+
       </div>
 
-      <!-- FOOTER SIGN-OFF -->
-      <footer class="flyer-footer">
-        <div class="footer-signer">
-          <div class="signer-name"><?php echo htmlspecialchars(COMMITTEE_CHAIRMAN); ?></div>
-          <div class="signer-title">Chairman, Electoral Committee</div>
-        </div>
-
-        <div class="footer-motto-seal">
-          <div class="seal-circle-mini">
-            OFFICIAL<br>SEAL
-          </div>
-          <div class="motto-text">"Service Above Self"</div>
-        </div>
-
-        <div class="footer-signer">
-          <div class="signer-name"><?php echo htmlspecialchars(CLUB_PRESIDENT); ?></div>
-          <div class="signer-title">Club President (2026/2027)</div>
-        </div>
-      </footer>
     </div>
+
+    <!-- FOOTER SECTION -->
+    <footer class="infographic-footer">
+      <div class="footer-left">
+        <div><strong>Electoral Committee Chairman:</strong> <?php echo htmlspecialchars(COMMITTEE_CHAIRMAN); ?></div>
+        <div><strong>Club President:</strong> <?php echo htmlspecialchars(CLUB_PRESIDENT); ?> &bull; Venue: Stratton Suite, Asokoro, Abuja</div>
+      </div>
+      <div class="footer-right">
+        <div class="motto">"Service Above Self"</div>
+        <div>No preferred candidates, only preferred processes.</div>
+      </div>
+    </footer>
+
   </div>
 
   <div class="toast-msg" id="toastMsg">✔ Link copied to clipboard!</div>
 
   <script>
-    // 1. Generate High-Precision QR Code for https://bit.ly/4AjHI16
+    // 1. Render Scannable QR Code for https://bit.ly/4AjHI16
     document.addEventListener("DOMContentLoaded", function() {
       const qrTarget = "<?php echo $shortUrl; ?>";
-      const qrContainer = document.getElementById("flyer-qrcode");
+      const qrContainer = document.getElementById("infographic-qr");
       
       new QRCode(qrContainer, {
         text: qrTarget,
-        width: 140,
-        height: 140,
+        width: 105,
+        height: 105,
         colorDark: "#00246C",
         colorLight: "#FFFFFF",
-        correctLevel: QRCode.CorrectLevel.H // High error correction so center badge works seamlessly
+        correctLevel: QRCode.CorrectLevel.H // High error correction
       });
     });
 
-    // 2. Copy Short URL to clipboard
+    // 2. Copy Link to clipboard
     function copyShortLink() {
       const url = "<?php echo $shortUrl; ?>";
       navigator.clipboard.writeText(url).then(function() {
@@ -994,14 +1110,14 @@ $shortUrl = "https://bit.ly/4AjHI16";
       const element = document.getElementById("flyerCapture");
 
       html2canvas(element, {
-        scale: 2.5, // 2.5x retina quality for ultra-sharp print
+        scale: 2.2, // 2.2x crisp resolution
         useCORS: true,
         allowTaint: true,
-        backgroundColor: "#071530",
+        backgroundColor: "#FFFFFF",
         logging: false
       }).then(function(canvas) {
         const link = document.createElement("a");
-        link.download = "Rotary-Club-Asokoro-Election-Guideline-Flyer.png";
+        link.download = "Rotary-Club-Asokoro-Election-Procedure-Flyer.png";
         link.href = canvas.toDataURL("image/png");
         link.click();
 
