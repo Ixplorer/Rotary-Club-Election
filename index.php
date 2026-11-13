@@ -45,6 +45,7 @@ require_once __DIR__ . '/config.php';
           <li><a href="#offices" class="nav-link">Available Offices</a></li>
           <li><a href="#notice" class="nav-link">Official Notice</a></li>
           <li><a href="#timetable" class="nav-link">Election Timetable</a></li>
+          <li><a href="flyer.php" target="_blank" class="nav-link" style="color: var(--rotary-gold); font-weight: 700;">Flyer (QR)</a></li>
           <li><a href="#lookup" class="nav-link">Check Status / Receipt</a></li>
           <li><a href="admin.php" class="nav-link" style="color: var(--rotary-cranberry); font-weight: 700;">Committee Portal</a></li>
           <li class="mobile-nav-cta">
@@ -193,11 +194,15 @@ require_once __DIR__ . '/config.php';
               </div>
             </div>
 
-            <!-- Quick Link to View Signed Notice Flyer in Lightbox -->
-            <div style="margin-top: 14px;">
+            <!-- Quick Links to View Signed Notice & Guideline Flyer with QR -->
+            <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+              <a href="flyer.php" target="_blank" class="btn btn-gold btn-sm" style="width: 100%; font-size: 0.82rem; padding: 9px 14px; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Official Guideline Flyer (with QR)
+              </a>
               <button type="button" class="btn btn-glass btn-sm" id="open-flyer-lightbox" style="width: 100%; font-size: 0.82rem; padding: 8px 14px; display: flex; align-items: center; justify-content: center; gap: 8px;">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                View Official Signed Notice Flyer
+                View Signed Notice Scan
               </button>
             </div>
           </div>

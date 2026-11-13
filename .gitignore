@@ -14,3 +14,7 @@ $RECYCLE.BIN/
 # Temporary logs
 *.log
 error_log
+
+# Archives & local env
+*.zip
+.env

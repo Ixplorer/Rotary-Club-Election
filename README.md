@@ -125,12 +125,19 @@ https://your-domain.com/setup.php
   - *Step 5:* Dossier review summary and instant submission.
 - **Online Status Verification Tool**: Instant candidate lookup by Reference ID (`RCA-27-XXXXXX`), Rotary Member ID, or Email.
 
-### 2. Standalone Acknowledgement Receipt (`receipt.php`)
+### 2. Official Election Guidelines Flyer (`flyer.php`)
+- **Print-Ready Poster & Flyer Layout**: Styled in deep Rotary royal navy and metallic gold, formatted for standard A4 and social media sharing.
+- **Dynamic Scannable QR Code**: High-precision QR code encoding [`https://bit.ly/4AjHI16`](https://bit.ly/4AjHI16) with central Rotary emblem badge.
+- **Direct Online Access Link**: Clearly features the short application URL [`https://bit.ly/4AjHI16`](https://bit.ly/4AjHI16).
+- **Comprehensive Election Briefing**: Summarizes the 8 elective offices, critical timetable dates, Four-Way Test, and aspirant requirements.
+- **One-Click Export Tools**: Includes instant **"Download PNG Flyer"** (via `html2canvas`), **"Print / Save as PDF"** (with clean `@media print` rules), and **"Copy Link"**.
+
+### 3. Standalone Acknowledgement Receipt (`receipt.php`)
 - Generates an official, printable acknowledgment receipt with club seal.
 - Displays candidate headshot, full profile, checklist items, and candidate digital signature.
 - Dynamic offline QR Code encoding the direct verification URL for smartphone scanning.
 
-### 3. Electoral Committee Admin Portal (`admin.php`)
+### 4. Electoral Committee Admin Portal (`admin.php`)
 - Passkey-protected dashboard (**Default Passkey:** `asokoro2027`).
 - Real-time nomination statistics (Total, Pending, Cleared, Disqualified, President Nominee).
 - Search, filter by office, and filter by screening status.
@@ -138,7 +145,7 @@ https://your-domain.com/setup.php
 - Committee Screening Verdicts: Update status to `SCREENED_CLEARED`, `PROVISIONAL`, or `DISQUALIFIED` with official notes.
 - One-click export to CSV / Excel for committee records.
 
-### 4. Mobile View Optimization
+### 5. Mobile View Optimization
 - **Responsive Navigation**: Animated hamburger toggle morphing into an "✕" with glassmorphic slide-down drawer menu and backdrop blur overlay.
 - **Form Usability**: `font-size: 16px` on all inputs to prevent iOS Safari auto-zoom; touch-optimized signature canvas; mobile step progress tracker.
 - **Fluid Layouts**: 1-column responsive grids on mobile, stacked touch buttons, and horizontal momentum touch-scrolling tables.
