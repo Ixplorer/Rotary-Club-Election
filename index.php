@@ -352,7 +352,7 @@ require_once __DIR__ . '/config.php';
         <div class="notice-tabs-nav">
           <button class="notice-tab-btn active" data-tab="tab-schedule">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            Election Timetable (12 Activities)
+            Election Timetable (10 Activities)
           </button>
           <button class="notice-tab-btn" data-tab="tab-eligibility">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
@@ -417,42 +417,30 @@ require_once __DIR__ . '/config.php';
                 </tr>
                 <tr>
                   <td><strong>6.</strong></td>
-                  <td><strong>Appeals arising from screening</strong> (within 24 hours to Committee Chairman)</td>
-                  <td>Monday, 23rd November, 2026</td>
-                  <td><span class="schedule-badge upcoming">Upcoming</span></td>
-                </tr>
-                <tr>
-                  <td><strong>7.</strong></td>
-                  <td><strong>Campaign Manifesto &amp; Peace Pact</strong> (At AGM Fellowship)</td>
-                  <td>Wednesday, 25th November, 2026</td>
-                  <td><span class="schedule-badge upcoming">Upcoming</span></td>
-                </tr>
-                <tr>
-                  <td><strong>8.</strong></td>
                   <td><strong>Accreditation of Voters</strong> (Physical presence &amp; Voters Register check)</td>
                   <td>Wednesday, 25th November, 2026 &bull; 5:00pm – 6:00pm</td>
                   <td><span class="schedule-badge upcoming">Election Day</span></td>
                 </tr>
                 <tr>
-                  <td><strong>9.</strong></td>
+                  <td><strong>7.</strong></td>
                   <td><strong>Opening of Poll &amp; Secret Ballot Voting</strong> (Stratton Suite, Asokoro, Abuja)</td>
                   <td>Wednesday, 25th November, 2026 &bull; 6:00pm – 8:30pm</td>
                   <td><span class="schedule-badge upcoming">Election Day</span></td>
                 </tr>
                 <tr>
-                  <td><strong>10.</strong></td>
+                  <td><strong>8.</strong></td>
                   <td><strong>Sorting, Open Counting &amp; Declaration of Results</strong></td>
                   <td>Wednesday, 25th November, 2026 (Immediately after Polls)</td>
                   <td><span class="schedule-badge upcoming">Election Day</span></td>
                 </tr>
                 <tr>
-                  <td><strong>11.</strong></td>
+                  <td><strong>9.</strong></td>
                   <td><strong>Issuance of Certificates of Return to Elected Candidates</strong></td>
                   <td>Wednesday, 25th November, 2026 at AGM</td>
                   <td><span class="schedule-badge upcoming">Election Day</span></td>
                 </tr>
                 <tr>
-                  <td><strong>12.</strong></td>
+                  <td><strong>10.</strong></td>
                   <td><strong>Electoral Committee Final Comprehensive Report</strong></td>
                   <td>Wednesday, 25th November, 2026</td>
                   <td><span class="schedule-badge upcoming">Election Day</span></td>
@@ -503,7 +491,6 @@ require_once __DIR__ . '/config.php';
               Screening of nominated candidates shall hold on <strong>Saturday, 21st November, 2026 between 11:00am and 2:00pm</strong>.
               Screening shall verify membership, attendance, financial standing, eligibility and character, and shall be conducted confidentially, fairly and without bias or favour.
               Any aspirant who fails screening shall be notified in writing with reasons, and the final list of successful candidates shall be published on <strong>Sunday, 22nd November, 2026</strong>.
-              An appeal arising from screening must be lodged in writing to the Chairman, Election Committee within 24 hours of publication.
             </p>
 
             <h3>Code of Conduct &amp; Peace Pact</h3>

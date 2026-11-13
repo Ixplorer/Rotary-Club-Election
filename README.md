@@ -31,14 +31,14 @@ Guided unconditionally by the **Rotary Four-Way Test**:
 |---|---|---|---|
 | **1** | Collection and submission of nominations form commence | **Wednesday, 11th Nov 2026** | Ongoing |
 | **2** | **Deadline for submission of nominations form** | **Friday, 20th Nov 2026 (5:00 PM prompt)** | **Strict Cut-Off** |
-| **3** | Screening of nominated candidates | **Saturday, 21st Nov 2026 (11:00 AM – 2:00 PM)** | Scheduled |
-| **4** | Publication of screening results & notice of appeal | **Sunday, 22nd Nov 2026** | Scheduled |
-| **5** | Deadline for submission of appeal | **Monday, 23rd Nov 2026 (12:00 Noon)** | Scheduled |
-| **6** | Hearing and resolution of appeal | **Monday, 23rd Nov 2026 (6:00 PM)** | Scheduled |
-| **7** | Publication of final list of cleared candidates | **Tuesday, 24th Nov 2026** | Scheduled |
-| **8** | Signing of Peace Pact by all cleared candidates | **Tuesday, 24th Nov 2026** | Scheduled |
-| **9** | **Annual General Meeting & Officers Election** | **Wednesday, 25th Nov 2026 (5:00 PM)** | **Election Day** |
-| **10** | **Venue** | **Stratton Suite, Asokoro, Abuja** | In-Person Only |
+| **3** | Voters Register display & financial standing cutoff | **Wednesday, 18th Nov 2026** | Scheduled |
+| **4** | Screening of nominated candidates | **Saturday, 21st Nov 2026 (11:00 AM – 2:00 PM)** | Scheduled |
+| **5** | Publication of final successful candidates list | **Sunday, 22nd Nov 2026** | Scheduled |
+| **6** | Accreditation of Voters (Physical presence & Voters Register check) | **Wednesday, 25th Nov 2026 (5:00 PM – 6:00 PM)** | Scheduled |
+| **7** | Opening of Poll & Secret Ballot Voting (Stratton Suite, Asokoro) | **Wednesday, 25th Nov 2026 (6:00 PM – 8:30 PM)** | **Election Day** |
+| **8** | Sorting, Open Counting & Declaration of Results | **Wednesday, 25th Nov 2026 (Immediately after Polls)** | **Election Day** |
+| **9** | Issuance of Certificates of Return to Elected Candidates | **Wednesday, 25th Nov 2026 at AGM** | **Election Day** |
+| **10** | Electoral Committee Final Comprehensive Report | **Wednesday, 25th Nov 2026** | **Election Day** |
 
 ---
 
@@ -116,7 +116,7 @@ https://your-domain.com/setup.php
 ### 1. Public Portal (`index.php`)
 - **Dynamic Animated Hero Section**: Ambient glowing light orbs, rotating 3D Rotary wheel, smooth hover perspectives, and running ticker of available offices.
 - **Real-Time Countdown Timer**: High-precision flip countdown clock to the 20th November 5:00 PM nomination cut-off.
-- **12-Stage Timetable & Guidelines**: Interactive guidelines with swipeable pill navigation on mobile devices.
+- **10-Stage Timetable & Guidelines**: Interactive guidelines with swipeable pill navigation on mobile devices.
 - **5-Step Expression of Interest Form**:
   - *Step 1:* Personal profile & position selector (with dynamic President-nominee RLI & Board experience fields).
   - *Step 2:* Proposer & Seconder validation (with distinct endorser and self-nomination checks).
